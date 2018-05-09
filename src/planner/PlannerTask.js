@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 
 class PlannerTask extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            progress: props.progress || "PROGRESS",
+            title: props.title || "TITLE"
+        }
+    }
+    
   render() {
     var progressDisplay = "";
-    switch (this.props.progress) {
+    switch (this.state.progress) {
         case "COMPLETED": 
             progressDisplay = "✓";
             break;
@@ -14,14 +23,24 @@ class PlannerTask extends Component {
     
     return (
       <div className="PlannerTask">
-        {this.props.title} &emsp;
+        {this.state.title} &emsp;
         <button onClick={this.onClickProgressIcon} >{progressDisplay}</button>
       </div>
     );
   }
   
-  onClickProgressIcon() {
-      
+  onClickProgressIcon = () => { //Note different than onClickProgressIcon() {...}
+      var progressToggle = {
+          "COMPLETED": "PROGRESS",
+          "PROGRESS": "COMPLETED"
+      };
+      this.setState((state) => {
+          var currentProgress = state.progress;
+          var nextProgress = progressToggle[currentProgress];
+          this.setState({
+            progress: nextProgress  
+          });
+      })
   }
   
 }
