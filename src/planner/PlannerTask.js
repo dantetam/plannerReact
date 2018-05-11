@@ -19,6 +19,8 @@ class PlannerTask extends Component {
         case "PROGRESS":
             progressDisplay = " ";
             break;
+        default:
+            break;
     }
     
     return (
