@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 class PlannerTask extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -9,20 +9,20 @@ class PlannerTask extends Component {
             title: props.title || "TITLE"
         }
     }
-    
+
   render() {
     var progressDisplay = "";
     switch (this.state.progress) {
-        case "COMPLETED": 
+        case "COMPLETED":
             progressDisplay = "✓";
             break;
         case "PROGRESS":
-            progressDisplay = " ";
+            progressDisplay = "☐";
             break;
         default:
             break;
     }
-    
+
     return (
       <div className="PlannerTask">
         {this.state.title} &emsp;
@@ -30,7 +30,7 @@ class PlannerTask extends Component {
       </div>
     );
   }
-  
+
   onClickProgressIcon = () => { //Note different than onClickProgressIcon() {...}
       var progressToggle = {
           "COMPLETED": "PROGRESS",
@@ -40,11 +40,11 @@ class PlannerTask extends Component {
           var currentProgress = state.progress;
           var nextProgress = progressToggle[currentProgress];
           this.setState({
-            progress: nextProgress  
+            progress: nextProgress
           });
       })
   }
-  
+
 }
 
 export default PlannerTask;
